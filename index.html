@@ -1,13 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RPS</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RPS - ✊🏼🖐🏼✌🏼</title>
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
-
-</head>
-<body>
-    
-</body>
+    <script defer src="/js/app.js"></script>
+  </head>
+  <body>
+    <header class="bg-[#778DA9] text-white text-center p-4">
+      <h1>Rock Paper Scissors</h1>
+    </header>
+    <main class="mx-auto py-6 px-3 max-w-xl">
+      <!-- Players selection -->
+      <section class="border rounded-md p-2 mb-4">
+        <div class="flex flex-col">
+          <p class="mb-2">Select number of players:</p>
+          <div class="flex flex-col gap-2">
+            <div>
+              <input
+                type="radio"
+                id="one-player"
+                name="drone"
+                value="one-player"
+                checked
+              />
+              <label for="one-player">1 Player</label>
+            </div>
+            <div>
+              <input
+                type="radio"
+                id="two-players"
+                name="drone"
+                value="two-players"
+              />
+              <label for="two-players">2 Players</label>
+            </div>
+          </div>
+          <button class="border cursor-pointer py-1 mt-2">Next</button>
+        </div>
+      </section>
+      <!-- Players name selection -->
+      <section class="border rounded-md p-2 mb-4">
+        <div class="flex flex-col">
+          <label name="player1" id="player1" for="player1"
+            >Enter Player 1 name:</label
+          >
+          <input
+            type="text"
+            id="player1"
+            name="player1"
+            placeholder="Player 1"
+            class="border px-2 mt-2"
+          />
+          <button class="border cursor-pointer py-1 mt-2">Next</button>
+        </div>
+      </section>
+      <!-- Game -->
+      <section>
+        <p>Choose your weapon:</p>
+        <div title="weaponsPlayer1">
+          <button title="weaponPlayer1" class="border cursor-pointer px-2">
+            Rock
+          </button>
+          <button title="weaponPlayer1" class="border cursor-pointer px-2">
+            Paper
+          </button>
+          <button title="weaponPlayer1" class="border cursor-pointer px-2">
+            Scissors
+          </button>
+        </div>
+        <button class="border cursor-pointer px-2">Start</button>
+      </section>
+    </main>
+  </body>
 </html>

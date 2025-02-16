@@ -1,59 +1,97 @@
 const $ = (el) => document.querySelector(el);
 const $$ = (el) => document.querySelectorAll(el);
 
-const weaponsPlayer1 = $$("[title= weaponPlayer1]");
-
-console.log(weaponsPlayer1);
+const playersSelectionSection = $("#playersSelection");
+const playersSelectionSectionBtn = $("#playersSelection button");
+const playersNameSection = $("#playersNameSection");
+const playersNameSectionBtn = $("#playersNameSection button");
+const gameSection = $("#game");
 
 class Player {
-  constructor(name, score) {
-    this.name = name;
-    this.score = score;
-    this.weapon = "";
+  constructor() {
+    this.name = "";
+    this.score = 0;
+    this.choice = "";
   }
-  setWeapon(weapon) {
-    this.weapon = weapon;
-  }
-}
 
-class Rock {
-    constructor() {
-        this.beats = "scissors";
-    }
+  setName(name) {
+    this.name = name;
+  }
+  setScore(score) {
+    this.score = score;
+  }
+  setChoice(choice) {
+    this.choice = choice;
+  }
+
+  getChoice() {
+    let choices = $$("#game button");
+    console.log(choices)
+    choices.forEach((choice) => {
+      console.log(choice.innerText)
+      choice.addEventListener("click", () => {
+        this.setChoice(choice)
+        console.log(choice);
+      });
+    });
+  }
 }
 
 class RPS {
   constructor() {
-    this.rock = "rock";
-    this.paper = "paper";
-    this.scissors = "scissors";
-    this.isGameOver = false;
     this.round = 0;
-    this.numberOfRounds = 3;
-    this.numberOfPlayers = 1;
-    this.player1 = Player;
-    this.player2 = Player || "Computer";
+    this.isGameOver = false;
+    this.player1 = Player1;
+    this.player2 = Player2;
+    this.numberOfPlayers = null;
+    this.numberOfRounds = null;
   }
+
   startGame() {
     this.round++;
-    this.player1 = new Player("Player1", 0);
-    if (this.numberOfPlayers === 1) {
-      this.player2 = new Player("Computer", 0);
-    } else {
-      this.player2 = new Player("Player2", 0);
+    console.log("The game started!");
+
+    this.setUpGame();
+    this.setPlayersNames();
+    Player1.getChoice()
+  }
+
+  setUpGame() {
+    playersSelectionSectionBtn.addEventListener("click", () => {
+      playersNameSection.style.display = "block";
+    });
+    playersNameSectionBtn.addEventListener("click", () => {
+      playersSelectionSection.style.display = "none";
+      playersNameSection.style.display = "none";
+      gameSection.style.display = "block";
+    });
+  }
+
+  setPlayersNames() {
+    // const isTwoPlayers = $("#twoPlayers").checked;
+    playersNameSectionBtn.addEventListener("click", () => {
+      const player1Name = $("#player1").value;
+      if (!player1Name) {
+        Player1.setName("Player1");
+      } else {
+        Player1.setName(player1Name);
+      }
+    });
+    this.player1 = Player1;
+
+    // p2 is missing when input -- need to fix
+    if (!Player2.name) {
+      this.player2 = Player2.setName("Computer");
+      this.numberOfPlayers = 1;
     }
   }
+
   getGameWinner() {
     return "Daniel";
   }
 }
+const Player1 = new Player();
+const Player2 = new Player();
 
-const Player1 = new Player("Daniel", 0);
-console.log(Player1);
-
-weaponsPlayer1.forEach((weapon) => {
-  weapon.addEventListener("click", () => {
-    console.log("test");
-    Player1.setWeapon(weapon.innerText);
-  });
-});
+const game = new RPS();
+game.startGame();

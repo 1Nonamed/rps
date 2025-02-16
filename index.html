@@ -8,44 +8,33 @@
     <script defer src="/js/app.js"></script>
   </head>
   <body>
-    <header class="bg-[#778DA9] text-white text-center p-4">
-      <h1>Rock Paper Scissors</h1>
+    <header
+      class="bg-[#778DA9] text-white text-center h-16 flex items-center justify-center px-3"
+    >
+      <h1 class="uppercase font-bold">Rock Paper Scissors</h1>
     </header>
-    <main class="mx-auto py-6 px-3 max-w-xl">
+    <main class="mx-auto px-3 max-w-xl h-[calc(100vh-64px)]">
       <!-- Players selection -->
-      <section class="border rounded-md p-2 mb-4">
-        <div class="flex flex-col">
+      <section id="playersSelection" class="border rounded-md p-2 mb-4 hidden">
+        <article class="flex flex-col">
           <p class="mb-2">Select number of players:</p>
           <div class="flex flex-col gap-2">
             <div>
-              <input
-                type="radio"
-                id="one-player"
-                name="drone"
-                value="one-player"
-                checked
-              />
-              <label for="one-player">1 Player</label>
+              <input type="radio" id="onePlayer" name="playerRadio" checked />
+              <label for="onePlayer">1 Player</label>
             </div>
             <div>
-              <input
-                type="radio"
-                id="two-players"
-                name="drone"
-                value="two-players"
-              />
-              <label for="two-players">2 Players</label>
+              <input type="radio" id="twoPlayers" name="playerRadio" />
+              <label for="twoPlayers">2 Players</label>
             </div>
           </div>
           <button class="border cursor-pointer py-1 mt-2">Next</button>
-        </div>
+        </article>
       </section>
-      <!-- Players name selection -->
-      <section class="border rounded-md p-2 mb-4">
-        <div class="flex flex-col">
-          <label name="player1" id="player1" for="player1"
-            >Enter Player 1 name:</label
-          >
+      <!-- Players' name input -->
+      <section id="playersNameSection" class="border rounded-md p-2 mb-4 hidden">
+        <article class="flex flex-col">
+          <label for="player1">Enter Player 1 name:</label>
           <input
             type="text"
             id="player1"
@@ -53,23 +42,48 @@
             placeholder="Player 1"
             class="border px-2 mt-2"
           />
-          <button class="border cursor-pointer py-1 mt-2">Next</button>
-        </div>
+          <button class="border cursor-pointer py-1 mt-2">Start Playing</button>
+        </article>
       </section>
       <!-- Game -->
-      <section>
-        <p>Choose your weapon:</p>
-        <div title="weaponsPlayer1">
-          <button title="weaponPlayer1" class="border cursor-pointer px-2">
-            Rock
+      <section id="game" class="flex flex-col h-full">
+        <div
+          class="flex flex-col items-center bg-slate-300 px-3 basis-1/2"
+        >
+          <div class="basis-1/5 flex justify-center items-center">
+            <span>Round 1</span>
+          </div>
+          <div class="flex justify-center items-center basis-4/5">
+            <div
+              class="h-36 w-36 bg-black rounded-full flex items-center justify-center"
+            >
+              <span class="text-7xl">🖐🏼</span>
+            </div>
+            <div
+              class="h-36 w-36 bg-black rounded-full flex items-center justify-center"
+            >
+              <span class="text-7xl">✊🏼</span>
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-wrap gap-2 justify-center basis-1/2">
+          <p>Choose your weapon:</p>
+
+          <div class="basis-full text-center">
+            <span
+              class="border cursor-pointer h-14 w-14 rounded-full text-4xl" name="rock"
+            >
+              ✊🏼
+            </span>
+          </div>
+          <button class="border cursor-pointer h-14 w-14 rounded-full text-4xl">
+            🖐🏼
           </button>
-          <button title="weaponPlayer1" class="border cursor-pointer px-2">
-            Paper
-          </button>
-          <button title="weaponPlayer1" class="border cursor-pointer px-2">
-            Scissors
+          <button class="border cursor-pointer h-14 w-14 rounded-full text-4xl">
+            ✌🏼
           </button>
         </div>
+
         <button class="border cursor-pointer px-2">Start</button>
       </section>
     </main>

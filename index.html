@@ -4,63 +4,78 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>RPS - ✊🏼🖐🏼✌🏼</title>
+    <link rel="stylesheet" href="/css/styles.css" />
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
     <script defer src="/js/app.js"></script>
   </head>
   <body>
     <header
-      class="bg-[#778DA9] text-white text-center h-16 flex items-center justify-center px-3"
+      class="bg-green-900 text-white text-center h-16 flex items-center justify-center px-3"
     >
-      <h1 class="uppercase font-bold">Rock Paper Scissors</h1>
+      <p class="text-lg uppercase font-bold">Rock Paper Scissors</p>
     </header>
-    <main class="mx-auto px-3 max-w-xl h-[calc(100vh-64px)]">
+    <main>
       <!-- Players selection -->
-      <section id="playersSelection" class="border rounded-md p-2 mb-4 hidden">
-        <article class="flex flex-col">
-          <p class="mb-2">Select number of players:</p>
-          <div class="flex flex-col gap-2">
-            <div>
+      <section id="playersSelection" class="px-4 pt-4 max-w-xl mx-auto hidden">
+        <article
+          class="flex flex-col border rounded-md bg-white text-sm p-2 gap-2"
+        >
+          <p class="font-semibold">Select number of players:</p>
+          <div class="flex flex-col">
+            <div class="py-1">
               <input type="radio" id="onePlayer" name="playerRadio" checked />
               <label for="onePlayer">1 Player</label>
             </div>
-            <div>
+            <div class="py-1">
               <input type="radio" id="twoPlayers" name="playerRadio" />
               <label for="twoPlayers">2 Players</label>
             </div>
           </div>
-          <button class="border cursor-pointer py-1 mt-2">Next</button>
+          <button
+            class="rounded-md uppercase font-bold cursor-pointer py-1 bg-[#FB8500]"
+          >
+            Next
+          </button>
         </article>
       </section>
       <!-- Players' name input -->
-      <section id="playersNameSection" class="border rounded-md p-2 mb-4 hidden">
-        <article class="flex flex-col">
-          <label for="player1">Enter Player 1 name:</label>
-          <input
-            type="text"
-            id="player1"
-            name="player1"
-            placeholder="Player 1"
-            class="border px-2 mt-2"
-          />
-          <button class="border cursor-pointer py-1 mt-2">Start Playing</button>
+      <section id="playersNameSection" class="mb-4 px-4 pt-4 max-w-xl mx-auto hidden">
+        <article
+          class="flex flex-col border rounded-md bg-white text-sm p-2 gap-2"
+        >
+          <div class="flex flex-col gap-2">
+            <label for="player1" class="font-semibold py-1"
+              >Enter Player 1 name:</label
+            >
+            <input
+              type="text"
+              id="player1"
+              name="player1"
+              placeholder="Player 1"
+              class="border rounded-sm px-2 py-1"
+            />
+          </div>
+          <button
+            class="rounded-md uppercase font-bold cursor-pointer py-1 bg-[#FB8500]"
+          >
+            Start Playing
+          </button>
         </article>
       </section>
       <!-- Game -->
-      <section id="game" class="flex flex-col h-full">
-        <div
-          class="flex flex-col items-center bg-slate-300 px-3 basis-1/2"
-        >
-          <div class="basis-1/5 flex justify-center items-center">
-            <span>Round 1</span>
+      <section id="game" class="flex flex-col max-w-xl mx-auto h-[calc(100vh-64px)]">
+        <div class="flex flex-col items-center">
+          <div class="flex justify-center items-center bg-blue-200 w-full">
+            <span class="uppercase font-semibold italic">Round 1</span>
           </div>
           <div class="flex justify-center items-center basis-4/5">
             <div
-              class="h-36 w-36 bg-black rounded-full flex items-center justify-center"
+              class="weaponDisplay"
             >
-              <span class="text-7xl">🖐🏼</span>
+              <span class="flex justify-center items-center h-full text-7xl">🖐🏼</span>
             </div>
             <div
-              class="h-36 w-36 bg-black rounded-full flex items-center justify-center"
+              class="weaponDisplay"
             >
               <span class="text-7xl">✊🏼</span>
             </div>
@@ -68,10 +83,10 @@
         </div>
         <div class="flex flex-wrap gap-2 justify-center basis-1/2">
           <p>Choose your weapon:</p>
-
           <div class="basis-full text-center">
             <span
-              class="border cursor-pointer h-14 w-14 rounded-full text-4xl" name="rock"
+              class="border cursor-pointer h-14 w-14 rounded-full text-4xl"
+              name="rock"
             >
               ✊🏼
             </span>

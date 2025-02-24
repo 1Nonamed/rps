@@ -68,10 +68,59 @@
       <!-- Game -->
       <section
         id="game"
-        class="flex flex-col max-w-xl mx-auto h-[calc(100vh-64px)] pb-4"
+        class="flex flex-col max-w-xl mx-auto h-[calc(100vh-64px)] pb-4 relative"
       >
+        <aside class="h-full">
+          <section class="px-4">
+            <header class="pt-2 text-center">
+              <h2 class="font-bold text-lg">Not sure how to play?</h2>
+            </header>
+            <div class="pt-2 mb-2">
+              <h3 class="italic">Objective: </h3>
+              <p class="mt-2">The goal of Rock, Paper, Scissors is to choose the move that defeats your opponent's move.
+              </p>
+            </div>
+            <div class="pt-2 mb-2">
+              <h3 class="italic">The Rules:</h3>
+              <ol class="list-decimal list-inside px-4">
+                <li class="my-2">
+                  Two players: You and an opponent play against each other.
+                </li>
+                <li class="mb-2">
+                  The choices: Each player chooses one of three items:
+                <span class="font-bold">Rock ✊🏼</span>,
+                <span class="font-bold">Paper 🖐🏼</span>, or
+                <span class="font-bold">Scissors ✌🏼</span>.
+              </li>
+            </ol>
+          </div>
+          <div class="pt-2 mb-2">
+            <h3 class="italic">How to Win</h3>
+            <ul class="list-disc list-inside py-2">
+              <li class="px-4 mb-1">
+                Rock✊🏼<span class="font-semibold italic">beats</span>
+                Scissors✌🏼
+              </li>
+              <li class="px-4 mb-1">
+                Scissors✌🏼<span class="font-semibold italic">beats</span>
+                Paper🖐🏼
+              </li>
+              <li class="px-4 mb-1">
+                Paper🖐🏼<span class="font-semibold italic">beats</span>
+                Rock✊🏼
+              </li>
+            </ul>
+            <p>After the reveal, the winner is decided based on the rules above. If you win, you score a point!</p>
+          </div>
+          <div>
+
+            <h3 class="italic">Ties</h3>
+            <p>If both players choose the same gesture (e.g., both choose Rock), it's a tie.</p>
+          </div>
+        </section>
+        </aside>
         <article
-          class="relative flex flex-col justify-center items-center basis-1/2"
+          class="relative flex flex-col justify-center items-center basis-1/2 hidden"
         >
           <header
             class="absolute top-0 flex justify-center items-center bg-blue-300 w-full"
@@ -94,7 +143,10 @@
           </div>
           <span class="text-9xl">3</span>
         </article>
-        <div class="flex flex-col gap-2 basis-1/2">
+        <div
+          id="gameButtons"
+          class="flex flex-col gap-2 justify-between basis-1/2 hidden"
+        >
           <p class="bg-blue-300 text-center w-full italic font-semibold">
             Choose your weapon:
           </p>
@@ -108,7 +160,7 @@
                 >✊🏼</span
               >
             </button>
-            <div class="flex gap-2">
+            <div>
               <button class="h-18 w-18 rounded-full cursor-pointer bg-blue-100">
                 <span
                   class="text-4xl border-2 border-dashed rounded-full border-blue-200"
@@ -122,13 +174,13 @@
                 >
               </button>
             </div>
-            <div class="px-4 w-full">
-              <button
-                class="rounded-md uppercase font-bold cursor-pointer py-1 bg-[#FB8500] w-full "
-              >
-                Start
-              </button>
-            </div>
+          </div>
+          <div class="px-4 w-full">
+            <button
+              class="rounded-md uppercase font-bold cursor-pointer py-1 bg-[#FB8500] w-full"
+            >
+              Start
+            </button>
           </div>
         </div>
       </section>

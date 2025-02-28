@@ -26,11 +26,11 @@ class Player {
 
   getChoice() {
     let choices = $$("#game button");
-    console.log(choices)
+    console.log(choices);
     choices.forEach((choice) => {
-      console.log(choice.innerText)
+      console.log(choice.innerText);
       choice.addEventListener("click", () => {
-        this.setChoice(choice)
+        this.setChoice(choice);
         console.log(choice);
       });
     });
@@ -47,13 +47,24 @@ class RPS {
     this.numberOfRounds = null;
   }
 
+  toggleHowToPlay() {
+    const howToPlayBtn = $("header button");
+    const howToPlayAside = $("aside");
+
+    howToPlayBtn.addEventListener("click", () => {
+      howToPlayAside.classList.toggle("hidden");
+    });
+    // PENDING: Toggle aside button icon when clicked
+  }
+
   startGame() {
     this.round++;
     console.log("The game started!");
 
+    this.toggleHowToPlay();
     this.setUpGame();
     this.setPlayersNames();
-    Player1.getChoice()
+    Player1.getChoice();
   }
 
   setUpGame() {

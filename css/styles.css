@@ -6,9 +6,10 @@ main {
     #ffffff 0.7000000000000001px
   );
   background-size: 14px 14px;
+  height: calc(100vh - 64px);
 }
 
-.weaponDisplay {
+.choiceDisplay {
   height: 150px;
   width: 150px;
   display: flex;

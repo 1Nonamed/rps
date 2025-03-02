@@ -83,9 +83,17 @@ class RPS {
 
   displayChoices(p1Choice, p2Choice) {
     const choices = $$(".choiceDisplay span");
-    const [p1ChoiceSpan, p2ChoiceSpan] = choices
+    const [p1ChoiceSpan, p2ChoiceSpan] = choices;
     p1ChoiceSpan.innerHTML = this.parseChoiceToEmoji(p1Choice);
     p2ChoiceSpan.innerHTML = this.parseChoiceToEmoji(p2Choice);
+  }
+
+  displayScores(p1Score, p2Score) {
+    console.log(p1Score, p2Score);
+    const scores = $$("#playerScore span");
+    const [p1ScoreSpan, p2ScoreSpan] = scores;
+    p1ScoreSpan.innerHTML = p1Score;
+    p2ScoreSpan.innerHTML = p2Score;
   }
 
   battle(player1Choice) {
@@ -95,12 +103,15 @@ class RPS {
 
     this.displayChoices(player1Choice, CPUChoice);
 
+    
+
     switch (player1Choice + CPUChoice) {
       case "rockscissors":
       case "scissorspaper":
       case "paperrock":
         console.log("Player 1 Wins");
         this.player1.score++;
+        this.displayScores(this.player1.score, this.player2.score);
         break;
 
       case "rockpaper":
@@ -108,6 +119,7 @@ class RPS {
       case "paperscissors":
         console.log("CPU Wins");
         this.player2.score++;
+        this.displayScores(this.player1.score, this.player2.score);
         break;
       default:
         console.log("Its a TIE");
@@ -122,6 +134,7 @@ class RPS {
 
   startGame() {
     let battleBtn = $('[name="battle"]');
+    
     let choicesOptions = $$("#gameButtons button");
 
     this.toggleHowToPlay();

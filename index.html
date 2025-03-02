@@ -149,7 +149,10 @@
               <span class="italic">Player 2</span>
             </p>
           </header>
-          <div class="flex-1 flex items-center justify-between gap-2">
+          <div
+            id="choicesDisplay"
+            class="flex-1 items-center justify-between gap-2 hidden"
+          >
             <div class="choiceDisplay">
               <span class="text-7xl">🖐🏼</span>
             </div>
@@ -162,7 +165,12 @@
               <span class="text-7xl">✌🏼</span>
             </div>
           </div>
-          <span class="text-9xl hidden">3</span>
+          <!-- Countdown -->
+          <span
+            id="countdown"
+            class="flex-1 flex items-center justify-center opacity-80 text-9xl"
+            >3</span
+          >
         </article>
         <div id="gameButtons" class="flex flex-col gap-2">
           <p class="bg-blue-300 text-center w-full italic font-semibold">

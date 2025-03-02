@@ -97,15 +97,13 @@ class RPS {
   }
 
   battle(player1Choice) {
-    let CPUChoiceIndex = Math.floor(Math.random() * this.choices.length);
-    let CPUChoice = this.choices[CPUChoiceIndex];
-    this.player2.setChoice(CPUChoice);
+    let player2ChoiceIndex = Math.floor(Math.random() * this.choices.length);
+    let player2Choice = this.choices[player2ChoiceIndex];
+    this.player2.setChoice(player2Choice);
 
-    this.displayChoices(player1Choice, CPUChoice);
+    this.displayChoices(player1Choice, player2Choice);
 
-    
-
-    switch (player1Choice + CPUChoice) {
+    switch (player1Choice + player2Choice) {
       case "rockscissors":
       case "scissorspaper":
       case "paperrock":
@@ -132,20 +130,51 @@ class RPS {
     return "Daniel";
   }
 
+  startCountdown(el, cb) {
+    let countdown = 3;
+    el.classList.remove("hidden");
+    el.innerHTML = countdown;
+
+    let interval = setInterval(() => {
+      countdown--;
+      if (countdown <= 0) {
+        clearInterval(interval);
+        el.classList.add("hidden");
+        $('#choicesDisplay').classList.remove('hidden')
+        $('#choicesDisplay').classList.add('flex')
+        cb();
+      } else {
+        el.innerHTML = countdown;
+      }
+    }, 1000);
+  }
+  
   startGame() {
     let battleBtn = $('[name="battle"]');
-    
     let choicesOptions = $$("#gameButtons button");
-
+    let countdownSpan = $("#countdown");
+    
     this.toggleHowToPlay();
     console.log("The game started!");
-
+    
     this.setUpGame();
     this.setPlayersNames();
-
+    
     choicesOptions.forEach((choice) => {
       choice.addEventListener("click", () => {
         this.player1.setChoice(choice.name);
+      });
+    });
+    
+    battleBtn.addEventListener("click", () => {
+      $('#choicesDisplay').classList.add('hidden')
+      this.startCountdown(countdownSpan, () => {
+        if (!this.player1.choice) {
+          let randomChoiceIndex = Math.floor(
+            Math.random() * this.choices.length
+          );
+          this.player1.setChoice(this.choices[randomChoiceIndex]);
+        }
         this.battle(this.player1.choice);
       });
     });

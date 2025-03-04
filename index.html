@@ -22,7 +22,7 @@
     </header>
     <main>
       <!-- Players selection -->
-      <section id="playersSelection" class="px-4 pt-4 max-w-xl mx-auto hidden">
+      <section id="playersSelection" class="px-4 pt-4 max-w-xl mx-auto">
         <article
           class="flex flex-col border rounded-md bg-white text-sm p-2 gap-2"
         >
@@ -47,7 +47,7 @@
       <!-- Players' name input -->
       <section
         id="playersNameSection"
-        class="mb-4 px-4 pt-4 max-w-xl mx-auto hidden"
+        class="mb-4 px-4 pt-4 max-w-xl mx-auto"
       >
         <article
           class="flex flex-col border rounded-md bg-white text-sm p-2 gap-2"
@@ -74,7 +74,7 @@
       <!-------------------- Game -------------------->
       <section
         id="game"
-        class="flex flex-col justify-between gap-4 mx-auto h-full pb-4"
+        class="flex-col justify-between gap-4 mx-auto h-full pb-4 hidden"
       >
         <!-- How to play! -->
         <aside class="absolute bg-white z-10 pb-10 hidden">
@@ -144,7 +144,7 @@
             <p class="text-sm font-semibold">
               Round <span id="roundNumber">1</span>
             </p>
-            <p class="text-sm font-semibold">
+            <p id='playersName' class="text-sm font-semibold">
               <span class="italic">Player 1</span> vs
               <span class="italic">Player 2</span>
             </p>

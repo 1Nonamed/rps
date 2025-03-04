@@ -5,7 +5,7 @@ const playersSelectionSection = $("#playersSelection");
 const playersSelectionSectionBtn = $("#playersSelection button");
 const playersNameSection = $("#playersNameSection");
 const playersNameSectionBtn = $("#playersNameSection button");
-const gameSection = $("#game");
+
 
 class Player {
   constructor() {
@@ -47,25 +47,31 @@ class RPS {
   }
 
   setUpGame() {
+    const gameSection = $("#game");
     playersSelectionSectionBtn.addEventListener("click", () => {
       playersNameSection.style.display = "block";
     });
     playersNameSectionBtn.addEventListener("click", () => {
       playersSelectionSection.style.display = "none";
       playersNameSection.style.display = "none";
-      gameSection.style.display = "block";
+      gameSection.style.display = "flex";
     });
   }
 
   setPlayersNames() {
     // const isTwoPlayers = $("#twoPlayers").checked;
+    let playersNameSpan = $$("#playersName span");
+    console.log(playersNameSpan)
     playersNameSectionBtn.addEventListener("click", () => {
       const player1Name = $("#player1").value;
       if (!player1Name) {
         this.player1.setName("Player1");
       } else {
         this.player1.setName(player1Name);
+        playersNameSpan[0].innerHTML = player1Name;
       }
+      this.player2.setName("CPU");
+      playersNameSpan[1].innerHTML = "CPU"
     });
 
     // p2 is missing when input -- need to fix
@@ -96,6 +102,11 @@ class RPS {
     p2ScoreSpan.innerHTML = p2Score;
   }
 
+  displayRound() {
+    this.round++;
+    $('#roundNumber').innerHTML = this.round;
+  }
+
   battle(player1Choice) {
     let player2ChoiceIndex = Math.floor(Math.random() * this.choices.length);
     let player2Choice = this.choices[player2ChoiceIndex];
@@ -123,7 +134,7 @@ class RPS {
         console.log("Its a TIE");
         break;
     }
-    this.round++;
+    this.displayRound()
   }
 
   getGameWinner() {

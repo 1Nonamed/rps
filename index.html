@@ -160,6 +160,7 @@
               <span class="italic">Player 2</span>
             </p>
           </header>
+          <!-- Display choices -->
           <div
             id="choicesDisplay"
             class="flex-1 items-center justify-between gap-2 hidden"
@@ -176,6 +177,13 @@
               <span class="text-7xl">✌🏼</span>
             </div>
           </div>
+          <!-- Display round winner -->
+          <div id="roundWinnerDiv" class="w-full text-center hidden">
+            <p id="roundWinner" class="italic font-semibold">Player 1 wins!</p>
+            <p id="roundWinnerAlt" class="italic capitalize">
+              Paper <span class="font-semibold">beats</span> Rock
+            </p>
+          </div>
           <!-- Countdown -->
           <span
             id="countdown"
@@ -183,10 +191,12 @@
             >3</span
           >
         </article>
+        <!-- Choices -->
         <div id="gameButtons" class="flex flex-col gap-2">
           <p class="bg-blue-300 text-center w-full italic font-semibold">
             Choose your weapon:
           </p>
+          <!-- Player 1 choices -->
           <div class="flex-1 flex flex-col items-center justify-center gap-2">
             <button
               class="h-18 w-18 rounded-full cursor-pointer bg-blue-100"

@@ -1,12 +1,6 @@
 const $ = (el) => document.querySelector(el);
 const $$ = (el) => document.querySelectorAll(el);
 
-const playersSelectionSection = $("#playersSelection");
-const playersSelectionSectionBtn = $("#playersSelection button");
-const playersNameSection = $("#playersNameSection");
-const playersNameSectionBtn = $("#playersNameSection button");
-
-
 class Player {
   constructor() {
     this.name = "";
@@ -47,38 +41,67 @@ class RPS {
   }
 
   setUpGame() {
+    const numberOfPlayersSection = $("#numberOfPlayers");
+    const numberOfPlayersBtn = $("#numberOfPlayersBtn");
+    const namesSection = $("#namesSection");
+    const namesSectionBtn = $("#namesSectionBtn");
     const gameSection = $("#game");
-    playersSelectionSectionBtn.addEventListener("click", () => {
-      playersNameSection.style.display = "block";
+    const twoPlayersRadio = $("#twoPlayers");
+    const twoPlayersInput = $("#player2Input");
+
+    // Show number of players section
+    numberOfPlayersBtn.addEventListener("click", () => {
+      // Show player 2 input when two players are selected
+      if (twoPlayersRadio.checked) {
+        twoPlayersInput.style.display = "flex";
+        this.numberOfPlayers = 2;
+      } else {
+        twoPlayersInput.style.display = "none";
+      }
+      namesSection.style.display = "block";
     });
-    playersNameSectionBtn.addEventListener("click", () => {
-      playersSelectionSection.style.display = "none";
-      playersNameSection.style.display = "none";
+
+    // Show game section after names are set
+    namesSectionBtn.addEventListener("click", () => {
+      numberOfPlayersSection.style.display = "none";
+      namesSection.style.display = "none";
+
+      this.setPlayersNames(namesSectionBtn, twoPlayersRadio);
+
       gameSection.style.display = "flex";
     });
   }
 
-  setPlayersNames() {
-    // const isTwoPlayers = $("#twoPlayers").checked;
+  setPlayersNames(namesSectionBtn, twoPlayersRadio) {
+    console.log("tessst");
     let playersNameSpan = $$("#playersName span");
-    console.log(playersNameSpan)
-    playersNameSectionBtn.addEventListener("click", () => {
-      const player1Name = $("#player1").value;
-      if (!player1Name) {
-        this.player1.setName("Player1");
-      } else {
-        this.player1.setName(player1Name);
-        playersNameSpan[0].innerHTML = player1Name;
-      }
-      this.player2.setName("CPU");
-      playersNameSpan[1].innerHTML = "CPU"
-    });
 
-    // p2 is missing when input -- need to fix
-    // if (!Player2.name) {
-    //   this.player2 = Player2.setName("Computer");
-    //   this.numberOfPlayers = 1;
-    // }
+    namesSectionBtn.addEventListener("click", () => {
+      console.log(twoPlayersRadio);
+      // let player1Name = $("#player1").value;
+      // let player2Name = $("#player2").value;
+
+      // Player vs CPU
+      if (this.numberOfPlayers === 1) {
+        this.player2.setName("CPU");
+        playersNameSpan[1].innerHTML = "CPU";
+      }
+
+      // Player vs Player
+      if (twoPlayersRadio.checked) {
+        this.numberOfPlayers = 2;
+
+        if (!player2Name) this.player2.setName("Player 2");
+        this.player2.setName(player2Name);
+        playersNameSpan[1].innerHTML = player2Name;
+      }
+
+      // Player 1 default name
+      if (player1Name === "") this.player1.setName("Player 1");
+
+      this.player1.setName(player1Name);
+      playersNameSpan[0].innerHTML = player1Name;
+    });
   }
 
   parseChoiceToEmoji(choice) {
@@ -104,17 +127,17 @@ class RPS {
 
   displayRound() {
     this.round++;
-    $('#roundNumber').innerHTML = this.round;
+    $("#roundNumber").innerHTML = this.round;
   }
 
-  battle(player1Choice) {
+  battle() {
     let player2ChoiceIndex = Math.floor(Math.random() * this.choices.length);
     let player2Choice = this.choices[player2ChoiceIndex];
     this.player2.setChoice(player2Choice);
 
-    this.displayChoices(player1Choice, player2Choice);
+    this.displayChoices(this.player1.choice, player2Choice);
 
-    switch (player1Choice + player2Choice) {
+    switch (this.player1.choice + player2Choice) {
       case "rockscissors":
       case "scissorspaper":
       case "paperrock":
@@ -134,12 +157,20 @@ class RPS {
         console.log("Its a TIE");
         break;
     }
-    this.displayRound()
+    this.displayRound();
   }
 
-  getGameWinner() {
-    return "Daniel";
-  }
+  // getRoundWinner() {
+  //   if (this.player1.score > Math.ceil(this.numberOfRounds / 2)) {
+  //     return this.player1.name;
+  //   } else {
+  //     return this.player2.name;
+  //   }
+  // }
+
+  // getGameWinner() {
+
+  // }
 
   startCountdown(el, cb) {
     let countdown = 3;
@@ -151,34 +182,37 @@ class RPS {
       if (countdown <= 0) {
         clearInterval(interval);
         el.classList.add("hidden");
-        $('#choicesDisplay').classList.remove('hidden')
-        $('#choicesDisplay').classList.add('flex')
+        $("#choicesDisplay").classList.remove("hidden");
+        $("#choicesDisplay").classList.add("flex");
         cb();
       } else {
         el.innerHTML = countdown;
       }
     }, 1000);
   }
-  
+
   startGame() {
-    let battleBtn = $('[name="battle"]');
+    let battleBtn = $("#battle");
     let choicesOptions = $$("#gameButtons button");
     let countdownSpan = $("#countdown");
-    
+
     this.toggleHowToPlay();
     console.log("The game started!");
-    
+
     this.setUpGame();
-    this.setPlayersNames();
-    
+    // this.setPlayersNames();
+
     choicesOptions.forEach((choice) => {
       choice.addEventListener("click", () => {
         this.player1.setChoice(choice.name);
       });
     });
-    
+
     battleBtn.addEventListener("click", () => {
-      $('#choicesDisplay').classList.add('hidden')
+      choicesOptions.forEach((choice) => {
+        choice.disabled = false;
+      });
+      $("#choicesDisplay").classList.add("hidden");
       this.startCountdown(countdownSpan, () => {
         if (!this.player1.choice) {
           let randomChoiceIndex = Math.floor(
@@ -186,7 +220,7 @@ class RPS {
           );
           this.player1.setChoice(this.choices[randomChoiceIndex]);
         }
-        this.battle(this.player1.choice);
+        this.battle();
       });
     });
   }

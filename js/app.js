@@ -129,6 +129,37 @@ class RPS {
     $("#roundNumber").innerHTML = this.round;
   }
 
+  displayRoundWinner(winner) {
+    $("#roundWinnerDiv").style.display = "block";
+
+    switch (winner) {
+      case "player1":
+        $("#roundWinner").innerHTML = `${this.player1.name} wins!`;
+        $(
+          "#roundWinnerAlt"
+        ).innerHTML = `${this.player1.choice} <span class="font-semibold lowercase">beats</span> ${this.player2.choice}`;
+        break;
+
+      case "player2":
+        $("#roundWinner").innerHTML = `${this.player2.name} wins!`;
+        $(
+          "#roundWinnerAlt"
+        ).innerHTML = `${this.player2.choice} <span class="font-semibold lowercase">beats</span> ${this.player1.choice}`;
+        break;
+
+      default:
+        $("#roundWinner").innerHTML = "It's a tie!";
+        $(
+          "#roundWinnerAlt"
+        ).innerHTML = `${this.player1.choice} <span class="font-semibold lowercase">ties</span> with ${this.player2.choice}`;
+        break;
+    }
+    // Hide the round winner div after 3 seconds
+    this.battleBtn.addEventListener("click", () => {
+      $("#roundWinnerDiv").style.display = "none";
+    });
+  }
+
   battle() {
     let player2ChoiceIndex = Math.floor(Math.random() * this.choices.length);
     let player2Choice = this.choices[player2ChoiceIndex];
@@ -137,23 +168,27 @@ class RPS {
     this.displayChoices(this.player1.choice, player2Choice);
 
     switch (this.player1.choice + player2Choice) {
+      // Player 1 wins
       case "rockscissors":
       case "scissorspaper":
       case "paperrock":
-        console.log("Player 1 Wins");
         this.player1.score++;
+        this.displayRoundWinner("player1");
         this.displayScores(this.player1.score, this.player2.score);
         break;
 
+      // Player 2 / CPU wins
       case "rockpaper":
       case "scissorsrock":
       case "paperscissors":
-        console.log("CPU Wins");
         this.player2.score++;
+        this.displayRoundWinner("player2");
         this.displayScores(this.player1.score, this.player2.score);
         break;
+
+      // Tie
       default:
-        console.log("Its a TIE");
+        this.displayRoundWinner("tie");
         break;
     }
   }
@@ -190,27 +225,24 @@ class RPS {
   }
 
   startGame() {
-    let battleBtn = $("#battle");
     let choicesOptions = $$("#gameButtons button");
     let countdownSpan = $("#countdown");
+    this.battleBtn = $("#battle");
 
     this.toggleHowToPlay();
-    console.log("The game started!");
-
     this.setUpGame();
-    // this.setPlayersNames();
 
+    // Enable choices and set player1 choice
     choicesOptions.forEach((choice) => {
+      choice.disabled = false;
       choice.addEventListener("click", () => {
         this.player1.setChoice(choice.name);
       });
     });
 
-    battleBtn.addEventListener("click", () => {
+    this.battleBtn.addEventListener("click", () => {
       this.displayRound();
-      choicesOptions.forEach((choice) => {
-        choice.disabled = false;
-      });
+
       $("#choicesDisplay").classList.add("hidden");
       this.startCountdown(countdownSpan, () => {
         if (!this.player1.choice) {

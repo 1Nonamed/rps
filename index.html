@@ -21,8 +21,8 @@
       </div>
     </header>
     <main>
-      <!-- Players selection -->
-      <section id="playersSelection" class="px-4 pt-4 max-w-xl mx-auto">
+      <!-- # Players selection -->
+      <section id="numberOfPlayers" class="px-4 pt-4 max-w-xl mx-auto">
         <article
           class="flex flex-col border rounded-md bg-white text-sm p-2 gap-2"
         >
@@ -38,17 +38,15 @@
             </div>
           </div>
           <button
+            id="numberOfPlayersBtn"
             class="rounded-md uppercase font-bold cursor-pointer py-1 bg-[#FB8500]"
           >
             Next
           </button>
         </article>
       </section>
-      <!-- Players' name input -->
-      <section
-        id="playersNameSection"
-        class="mb-4 px-4 pt-4 max-w-xl mx-auto"
-      >
+      <!-- Players name input -->
+      <section id="namesSection" class="mb-4 px-4 pt-4 max-w-xl mx-auto hidden">
         <article
           class="flex flex-col border rounded-md bg-white text-sm p-2 gap-2"
         >
@@ -63,8 +61,21 @@
               placeholder="Player 1"
               class="border rounded-sm px-2 py-1"
             />
+            <div class="flex flex-col gap-2" id="player2Input">
+              <label for="player2" class="font-semibold py-1"
+                >Enter Player 2 name:</label
+              >
+              <input
+                type="text"
+                id="player2"
+                name="player2"
+                placeholder="Player 2"
+                class="border rounded-sm px-2 py-1"
+              />
+            </div>
           </div>
           <button
+            id="namesSectionBtn"
             class="rounded-md uppercase font-bold cursor-pointer py-1 bg-[#FB8500]"
           >
             Start Playing
@@ -144,7 +155,7 @@
             <p class="text-sm font-semibold">
               Round <span id="roundNumber">1</span>
             </p>
-            <p id='playersName' class="text-sm font-semibold">
+            <p id="playersName" class="text-sm font-semibold">
               <span class="italic">Player 1</span> vs
               <span class="italic">Player 2</span>
             </p>
@@ -180,6 +191,7 @@
             <button
               class="h-18 w-18 rounded-full cursor-pointer bg-blue-100"
               name="rock"
+              disabled
             >
               <span
                 class="text-4xl border-2 border-dashed rounded-full border-blue-200"
@@ -190,6 +202,7 @@
               <button
                 class="h-18 w-18 rounded-full cursor-pointer bg-blue-100"
                 name="paper"
+                disabled
               >
                 <span
                   class="text-4xl border-2 border-dashed rounded-full border-blue-200"
@@ -199,6 +212,7 @@
               <button
                 class="h-18 w-18 rounded-full cursor-pointer bg-blue-100"
                 name="scissors"
+                disabled
               >
                 <span
                   class="text-4xl border-2 border-dashed rounded-full border-blue-200"
@@ -210,8 +224,8 @@
         </div>
         <div class="px-4 w-full">
           <button
+            id="battle"
             class="rounded-md uppercase font-bold cursor-pointer py-1 bg-[#FB8500] w-full"
-            name="battle"
           >
             Start
           </button>

@@ -66,42 +66,41 @@ class RPS {
       numberOfPlayersSection.style.display = "none";
       namesSection.style.display = "none";
 
-      this.setPlayersNames(namesSectionBtn, twoPlayersRadio);
+      this.setPlayersNames();
 
       gameSection.style.display = "flex";
     });
   }
 
-  setPlayersNames(namesSectionBtn, twoPlayersRadio) {
-    console.log("tessst");
+  setPlayersNames() {
     let playersNameSpan = $$("#playersName span");
+    let player1Name = $("#player1").value;
+    let player2Name = $("#player2").value;
 
-    namesSectionBtn.addEventListener("click", () => {
-      console.log(twoPlayersRadio);
-      // let player1Name = $("#player1").value;
-      // let player2Name = $("#player2").value;
+    this.player1.setName(player1Name);
+    playersNameSpan[0].innerHTML = player1Name;
 
-      // Player vs CPU
-      if (this.numberOfPlayers === 1) {
-        this.player2.setName("CPU");
-        playersNameSpan[1].innerHTML = "CPU";
+    if (!player1Name) {
+      this.player1.setName("Player 1");
+      playersNameSpan[0].innerHTML = "Player 1";
+    }
+
+    // Player vs CPU
+    if (this.numberOfPlayers === 1) {
+      this.player2.setName("CPU");
+      playersNameSpan[1].innerHTML = "CPU";
+    }
+
+    // Player vs Player
+    if (this.numberOfPlayers === 2) {
+      this.player2.setName(player2Name);
+      playersNameSpan[1].innerHTML = player2Name;
+
+      if (!player2Name) {
+        this.player2.setName("Player 2");
+        playersNameSpan[1].innerHTML = "Player 2";
       }
-
-      // Player vs Player
-      if (twoPlayersRadio.checked) {
-        this.numberOfPlayers = 2;
-
-        if (!player2Name) this.player2.setName("Player 2");
-        this.player2.setName(player2Name);
-        playersNameSpan[1].innerHTML = player2Name;
-      }
-
-      // Player 1 default name
-      if (player1Name === "") this.player1.setName("Player 1");
-
-      this.player1.setName(player1Name);
-      playersNameSpan[0].innerHTML = player1Name;
-    });
+    }
   }
 
   parseChoiceToEmoji(choice) {

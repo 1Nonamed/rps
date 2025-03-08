@@ -156,7 +156,6 @@ class RPS {
         console.log("Its a TIE");
         break;
     }
-    this.displayRound();
   }
 
   // getRoundWinner() {
@@ -208,6 +207,7 @@ class RPS {
     });
 
     battleBtn.addEventListener("click", () => {
+      this.displayRound();
       choicesOptions.forEach((choice) => {
         choice.disabled = false;
       });

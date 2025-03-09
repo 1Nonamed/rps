@@ -17,7 +17,7 @@
       <div
         class="h-10 w-10 bg-blue-300 flex items-center justify-center absolute top-2 right-0 rounded-l-md"
       >
-        <button class="text-2xl font-bold">?</button>
+        <button class="text-2xl font-bold h-full w-full">?</button>
       </div>
     </header>
     <main>
@@ -111,15 +111,17 @@
         class="flex-col justify-between gap-4 mx-auto h-full pb-4 hidden"
       >
         <!-- How to play! -->
-        <aside class="absolute bg-blue-50 z-10 pb-10 hidden">
-          <section class="relative px-4">
+        <aside
+          class="absolute top-16 left-0 right-0 bottom-0 bg-blue-50 z-10 pb-10 text-center h-full hidden"
+        >
+          <section class="relative flex flex-col gap-2 px-4 py-4 h-full">
             <header
               class="pt-2 text-center h-12 flex justify-center items-center"
             >
               <h2 class="font-bold text-lg">Not sure how to play?</h2>
             </header>
             <div class="pt-2 mb-2">
-              <h3 class="italic">Objective:</h3>
+              <h3 class="italic font-bold">Objective:</h3>
               <p class="mt-2">
                 The goal of <span class="font-bold">Rock ✊🏼</span>,
                 <span class="font-bold">Paper 🖐🏼</span>,
@@ -128,7 +130,7 @@
               </p>
             </div>
             <div class="pt-2 mb-2">
-              <h3 class="italic">The Rules:</h3>
+              <h3 class="italic font-bold">The Rules:</h3>
               <ol class="list-decimal list-inside px-4">
                 <li class="my-2">
                   Two players: You and an opponent play against each other.
@@ -142,7 +144,7 @@
               </ol>
             </div>
             <div class="pt-2 mb-2">
-              <h3 class="italic">How to Win</h3>
+              <h3 class="italic font-bold">How to Win</h3>
               <ul class="list-disc list-inside py-2">
                 <li class="px-4 mb-1">
                   Rock✊🏼<span class="font-semibold italic">beats</span>
@@ -163,7 +165,7 @@
               </p>
             </div>
             <div>
-              <h3 class="italic">Ties</h3>
+              <h3 class="italic font-bold">Ties</h3>
               <p>
                 If both players choose the same gesture (e.g., both choose
                 Rock), it's a tie.
@@ -313,10 +315,10 @@
             </div>
           </div>
         </div>
-        <div class="flex px-4 w-full gap-2">
+        <div class="flex justify-center px-4 w-full gap-2 md:max-w-1/2 mx-auto">
           <button
             id="battle"
-            class="flex-1 rounded-md uppercase font-bold cursor-pointer py-1 px-4 bg-[#FB8500]"
+            class="flex-1 rounded-md uppercase font-bold cursor-pointer py-1 px-4 bg-[#FB8500] max-w-40"
           >
             Start
           </button>

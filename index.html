@@ -23,11 +23,9 @@
     <main>
       <!-- # Players selection -->
       <section id="numberOfPlayers" class="px-4 pt-4 max-w-xl mx-auto">
-        <article
-          class="flex flex-col border rounded-md bg-white text-sm p-2 gap-2"
-        >
-          <p class="font-semibold">Select number of players:</p>
-          <div class="flex flex-col">
+        <article class="flex flex-col rounded-md bg-blue-100 text-sm p-4 gap-2">
+          <p class="font-semibold py-2">Select number of players:</p>
+          <div class="flex flex-col bg-blue-50 rounded-md p-2 mb-2">
             <div class="py-1">
               <input type="radio" id="onePlayer" name="playerRadio" checked />
               <label for="onePlayer">1 Player</label>
@@ -39,7 +37,7 @@
           </div>
           <button
             id="numberOfPlayersBtn"
-            class="rounded-md uppercase font-bold cursor-pointer py-1 bg-[#FB8500]"
+            class="rounded-md uppercase font-bold cursor-pointer py-1 bg-[#FB8500] text-white"
           >
             Next
           </button>
@@ -47,9 +45,7 @@
       </section>
       <!-- Players name input -->
       <section id="namesSection" class="mb-4 px-4 pt-4 max-w-xl mx-auto hidden">
-        <article
-          class="flex flex-col border rounded-md bg-white text-sm p-2 gap-2"
-        >
+        <article class="flex flex-col rounded-md bg-blue-100 text-sm p-4 gap-2">
           <div class="flex flex-col gap-2">
             <label for="player1" class="font-semibold py-1"
               >Enter Player 1 name:</label
@@ -59,7 +55,7 @@
               id="player1"
               name="player1"
               placeholder="Player 1"
-              class="border rounded-sm px-2 py-1"
+              class="bg-blue-50 rounded-sm px-2 py-1"
             />
             <div class="flex flex-col gap-2" id="player2Input">
               <label for="player2" class="font-semibold py-1"
@@ -70,13 +66,34 @@
                 id="player2"
                 name="player2"
                 placeholder="Player 2"
-                class="border rounded-sm px-2 py-1"
+                class="bg-blue-50 rounded-sm px-2 py-1"
               />
+            </div>
+          </div>
+          <div class="flex flex-col rounded-md text-sm py-2 gap-2">
+            <p class="font-semibold">Select number of rounds:</p>
+            <div id="rounds" class="flex flex-col bg-blue-50 rounded-md p-2">
+              <div class="py-1">
+                <input type="radio" id="round-1" name="roundRadio" checked />
+                <label for="round-1">1 Round</label>
+              </div>
+              <div class="py-1">
+                <input type="radio" id="round-3" name="roundRadio" />
+                <label for="round-3">3 Rounds</label>
+              </div>
+              <div class="py-1">
+                <input type="radio" id="round-5" name="roundRadio" />
+                <label for="round-5">5 Rounds</label>
+              </div>
+              <div class="py-1">
+                <input type="radio" id="round-7" name="roundRadio" />
+                <label for="round-7">7 Rounds</label>
+              </div>
             </div>
           </div>
           <button
             id="namesSectionBtn"
-            class="rounded-md uppercase font-bold cursor-pointer py-1 bg-[#FB8500]"
+            class="rounded-md uppercase font-bold cursor-pointer py-1 bg-[#FB8500] text-white"
           >
             Start Playing
           </button>
@@ -88,7 +105,7 @@
         class="flex-col justify-between gap-4 mx-auto h-full pb-4 hidden"
       >
         <!-- How to play! -->
-        <aside class="absolute bg-white z-10 pb-10 hidden">
+        <aside class="absolute bg-blue-50 z-10 pb-10 hidden">
           <section class="relative px-4">
             <header
               class="pt-2 text-center h-12 flex justify-center items-center"
@@ -193,51 +210,115 @@
         </article>
         <!-- Choices -->
         <div id="gameButtons" class="flex flex-col gap-2">
-          <p class="bg-blue-300 text-center w-full italic font-semibold">
+          <p class="bg-blue-300 text-center w-full italic font-semibold px-2">
             Choose your weapon:
           </p>
-          <!-- Player 1 choices -->
-          <div class="flex-1 flex flex-col items-center justify-center gap-2">
-            <button
-              class="h-18 w-18 rounded-full cursor-pointer bg-blue-100"
-              name="rock"
-              disabled
+          <div class="flex gap-4 px-2 py-2">
+            <!-- Player 1 choices -->
+            <div class="flex-1 flex flex-col items-center justify-center gap-2">
+              <div class="flex flex-1 flex-col gap-1">
+                <button
+                  class="h-18 w-18 rounded-full cursor-pointer bg-blue-100"
+                  name="rock"
+                  disabled
+                >
+                  <span
+                    class="text-4xl border-2 border-dashed rounded-full border-blue-200"
+                    >✊🏼</span
+                  >
+                </button>
+                <p class="text-center text-sm font-semibold">Press 1️⃣</p>
+              </div>
+              <div class="flex gap-2">
+                <div class="flex flex-1 flex-col gap-1">
+                  <button
+                    class="h-18 w-18 rounded-full cursor-pointer bg-blue-100"
+                    name="paper"
+                    disabled
+                  >
+                    <span
+                      class="text-4xl border-2 border-dashed rounded-full border-blue-200"
+                      >🖐🏼</span
+                    >
+                  </button>
+                  <p class="text-center text-sm font-semibold">Press 2️⃣</p>
+                </div>
+                <div class="flex flex-1 flex-col gap-1">
+                  <button
+                    class="h-18 w-18 rounded-full cursor-pointer bg-blue-100 relative"
+                    name="scissors"
+                    disabled
+                  >
+                    <span
+                      class="text-4xl border-2 border-dashed rounded-full border-blue-200"
+                      >✌🏼</span
+                    >
+                  </button>
+                  <p class="text-center text-sm font-semibold">Press 3️⃣</p>
+                </div>
+              </div>
+            </div>
+            <!-- Player 2 choices -->
+            <div
+              id="p2Choices"
+              class="flex-1 flex-col items-center justify-center gap-2 hidden"
             >
-              <span
-                class="text-4xl border-2 border-dashed rounded-full border-blue-200"
-                >✊🏼</span
-              >
-            </button>
-            <div>
-              <button
-                class="h-18 w-18 rounded-full cursor-pointer bg-blue-100"
-                name="paper"
-                disabled
-              >
-                <span
-                  class="text-4xl border-2 border-dashed rounded-full border-blue-200"
-                  >🖐🏼</span
+              <div class="flex flex-1 flex-col gap-1">
+                <button
+                  class="h-18 w-18 rounded-full cursor-pointer bg-blue-100"
+                  name="rock"
+                  disabled
                 >
-              </button>
-              <button
-                class="h-18 w-18 rounded-full cursor-pointer bg-blue-100"
-                name="scissors"
-                disabled
-              >
-                <span
-                  class="text-4xl border-2 border-dashed rounded-full border-blue-200"
-                  >✌🏼</span
-                >
-              </button>
+                  <span
+                    class="text-4xl border-2 border-dashed rounded-full border-blue-200"
+                    >✊🏼</span
+                  >
+                </button>
+                <p class="text-center text-sm font-semibold">Press ⬅️</p>
+              </div>
+              <div class="flex gap-2">
+                <div class="flex flex-1 flex-col gap-1">
+                  <button
+                    class="h-18 w-18 rounded-full cursor-pointer bg-blue-100"
+                    name="paper"
+                    disabled
+                  >
+                    <span
+                      class="text-4xl border-2 border-dashed rounded-full border-blue-200"
+                      >🖐🏼</span
+                    >
+                  </button>
+                  <p class="text-center text-sm font-semibold">Press ⬇️</p>
+                </div>
+                <div class="flex flex-1 flex-col gap-1">
+                  <button
+                    class="h-18 w-18 rounded-full cursor-pointer bg-blue-100 relative"
+                    name="scissors"
+                    disabled
+                  >
+                    <span
+                      class="text-4xl border-2 border-dashed rounded-full border-blue-200"
+                      >✌🏼</span
+                    >
+                  </button>
+                  <p class="text-center text-sm font-semibold">Press ➡️</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-        <div class="px-4 w-full">
+        <div class="flex px-4 w-full gap-2">
           <button
             id="battle"
-            class="rounded-md uppercase font-bold cursor-pointer py-1 bg-[#FB8500] w-full"
+            class="flex-1 rounded-md uppercase font-bold cursor-pointer py-1 px-4 bg-[#FB8500]"
           >
             Start
+          </button>
+          <button
+            id="reset"
+            class="rounded-md uppercase font-bold cursor-pointer py-1 px-4 bg-[#FB8500]"
+          >
+            Reset
           </button>
         </div>
       </section>

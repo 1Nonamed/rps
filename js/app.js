@@ -40,39 +40,6 @@ class RPS {
     // PENDING: Toggle aside button icon when clicked
   }
 
-  setUpGame() {
-    const numberOfPlayersSection = $("#numberOfPlayers");
-    const numberOfPlayersBtn = $("#numberOfPlayersBtn");
-    const namesSection = $("#namesSection");
-    const namesSectionBtn = $("#namesSectionBtn");
-    const gameSection = $("#game");
-    const twoPlayersRadio = $("#twoPlayers");
-    const twoPlayersInput = $("#player2Input");
-
-    // Show number of players section
-    numberOfPlayersBtn.addEventListener("click", () => {
-      // Show player 2 input when two players are selected
-      if (twoPlayersRadio.checked) {
-        twoPlayersInput.style.display = "flex";
-        this.numberOfPlayers = 2;
-      } else {
-        twoPlayersInput.style.display = "none";
-      }
-      namesSection.style.display = "block";
-    });
-
-    // Show game section after names are set
-    namesSectionBtn.addEventListener("click", () => {
-      numberOfPlayersSection.style.display = "none";
-      namesSection.style.display = "none";
-
-      this.setPlayersNames();
-      this.setNumberOfRounds();
-
-      gameSection.style.display = "flex";
-    });
-  }
-
   setPlayersNames() {
     let playersNameSpan = $$("#playersName span");
     let player1Name = $("#player1").value;
@@ -108,8 +75,41 @@ class RPS {
     let rounds = $$("#rounds input");
     rounds.forEach((round) => {
       round.addEventListener("click", () => {
+        console.log("click");
         this.numberOfRounds = +round.value;
       });
+    });
+  }
+
+  setUpGame() {
+    const numberOfPlayersSection = $("#numberOfPlayers");
+    const numberOfPlayersBtn = $("#numberOfPlayersBtn");
+    const namesSection = $("#namesSection");
+    const namesSectionBtn = $("#namesSectionBtn");
+    const gameSection = $("#game");
+    const twoPlayersRadio = $("#twoPlayers");
+    const twoPlayersInput = $("#player2Input");
+
+    // Show number of players section
+    numberOfPlayersBtn.addEventListener("click", () => {
+      // Show player 2 input when two players are selected
+      if (twoPlayersRadio.checked) {
+        twoPlayersInput.style.display = "flex";
+        this.numberOfPlayers = 2;
+      } else {
+        twoPlayersInput.style.display = "none";
+      }
+      namesSection.style.display = "block";
+    });
+
+    // Show game section after names are set
+    namesSectionBtn.addEventListener("click", () => {
+      numberOfPlayersSection.style.display = "none";
+      namesSection.style.display = "none";
+
+      this.setPlayersNames();
+
+      gameSection.style.display = "flex";
     });
   }
 
@@ -168,6 +168,21 @@ class RPS {
     this.battleBtn.addEventListener("click", () => {
       $("#roundWinnerDiv").style.display = "none";
     });
+  }
+
+  displayGameWinner() {
+    if (
+      this.player1.score > this.numberOfRounds / 2 &&
+      this.numberOfRounds >= 3
+    ) {
+      this.isGameOver = true;
+      $("#game").style.display = "none";
+      $("#gameWinner").innerHTML = `${this.player1.name} wins!`;
+    } else {
+      $("#game").style.display = "none";
+      this.isGameOver = true;
+      $("#gameWinner").innerHTML = `${this.player2.name} wins!`;
+    }
   }
 
   battle() {
@@ -261,6 +276,7 @@ class RPS {
     this.battleBtn = $("#battle");
 
     this.toggleHowToPlay();
+    this.setNumberOfRounds();
     this.setUpGame();
 
     // Enable choices and set player1 choice
@@ -272,9 +288,9 @@ class RPS {
     });
 
     this.battleBtn.addEventListener("click", () => {
+      this.displayRound();
       this.battleBtn.disabled = true;
       this.battleBtn.innerHTML = "Next Round";
-      this.displayRound();
 
       $("#choicesDisplay").classList.add("hidden");
 

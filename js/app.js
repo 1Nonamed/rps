@@ -96,6 +96,7 @@ class RPS {
       if (twoPlayersRadio.checked) {
         twoPlayersInput.style.display = "flex";
         this.numberOfPlayers = 2;
+        $("#p2Choices").style.display = "flex";
       } else {
         twoPlayersInput.style.display = "none";
       }

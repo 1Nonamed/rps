@@ -74,19 +74,25 @@
             <p class="font-semibold">Select number of rounds:</p>
             <div id="rounds" class="flex flex-col bg-blue-50 rounded-md p-2">
               <div class="py-1">
-                <input type="radio" id="round-1" name="roundRadio" checked />
+                <input
+                  type="radio"
+                  id="round-1"
+                  name="roundRadio"
+                  value="1"
+                  checked
+                />
                 <label for="round-1">1 Round</label>
               </div>
               <div class="py-1">
-                <input type="radio" id="round-3" name="roundRadio" />
+                <input type="radio" id="round-3" name="roundRadio" value="3" />
                 <label for="round-3">3 Rounds</label>
               </div>
               <div class="py-1">
-                <input type="radio" id="round-5" name="roundRadio" />
+                <input type="radio" id="round-5" name="roundRadio" value="5" />
                 <label for="round-5">5 Rounds</label>
               </div>
               <div class="py-1">
-                <input type="radio" id="round-7" name="roundRadio" />
+                <input type="radio" id="round-7" name="roundRadio" value="7" />
                 <label for="round-7">7 Rounds</label>
               </div>
             </div>
@@ -321,6 +327,9 @@
             Reset
           </button>
         </div>
+      </section>
+      <section id="gameWinnerDiv" class="hidden">
+        <p id="gameWinner" class="text-center text-2xl font-bold"></p>
       </section>
     </main>
   </body>

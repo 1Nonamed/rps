@@ -67,6 +67,7 @@ class RPS {
       namesSection.style.display = "none";
 
       this.setPlayersNames();
+      this.setNumberOfRounds();
 
       gameSection.style.display = "flex";
     });
@@ -101,6 +102,15 @@ class RPS {
         playersNameSpan[1].innerHTML = "Player 2";
       }
     }
+  }
+
+  setNumberOfRounds() {
+    let rounds = $$("#rounds input");
+    rounds.forEach((round) => {
+      round.addEventListener("click", () => {
+        this.numberOfRounds = +round.value;
+      });
+    });
   }
 
   parseChoiceToEmoji(choice) {
@@ -190,22 +200,23 @@ class RPS {
         this.displayRoundWinner("tie");
         break;
     }
+    this.battleBtn.disabled = false;
   }
 
   handleKeyDown(e) {
     switch (e.key.toLowerCase()) {
       // Player 1 choices on keydown
-      case "a":
+      case "1":
         console.log("p1 rock");
         this.player1.setChoice("rock");
         break;
-      case "s":
+      case "2":
         this.player1.setChoice("paper");
         break;
-      case "d":
+      case "3":
         this.player1.setChoice("scissors");
         break;
-        // Player 2 choices on keydown
+      // Player 2 choices on keydown
       case "arrowleft":
         this.player2.setChoice("rock");
         break;
@@ -215,7 +226,7 @@ class RPS {
       case "arrowright":
         this.player2.setChoice("scissors");
         break;
-        // Default | Wrong key pressed
+      // Default | Wrong key pressed
       default:
         console.log("Wrong key pressed");
         break;
@@ -261,6 +272,8 @@ class RPS {
     });
 
     this.battleBtn.addEventListener("click", () => {
+      this.battleBtn.disabled = true;
+      this.battleBtn.innerHTML = "Next Round";
       this.displayRound();
 
       $("#choicesDisplay").classList.add("hidden");

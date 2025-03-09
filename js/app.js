@@ -161,13 +161,12 @@ class RPS {
   }
 
   battle() {
-    let player2ChoiceIndex = Math.floor(Math.random() * this.choices.length);
-    let player2Choice = this.choices[player2ChoiceIndex];
-    this.player2.setChoice(player2Choice);
+    let p1Choice = this.player1.choice;
+    let p2Choice = this.player2.choice;
 
-    this.displayChoices(this.player1.choice, player2Choice);
+    this.displayChoices(p1Choice, p2Choice);
 
-    switch (this.player1.choice + player2Choice) {
+    switch (p1Choice + p2Choice) {
       // Player 1 wins
       case "rockscissors":
       case "scissorspaper":
@@ -193,20 +192,39 @@ class RPS {
     }
   }
 
-  // getRoundWinner() {
-  //   if (this.player1.score > Math.ceil(this.numberOfRounds / 2)) {
-  //     return this.player1.name;
-  //   } else {
-  //     return this.player2.name;
-  //   }
-  // }
-
-  // getGameWinner() {
-
-  // }
+  handleKeyDown(e) {
+    switch (e.key.toLowerCase()) {
+      // Player 1 choices on keydown
+      case "a":
+        console.log("p1 rock");
+        this.player1.setChoice("rock");
+        break;
+      case "s":
+        this.player1.setChoice("paper");
+        break;
+      case "d":
+        this.player1.setChoice("scissors");
+        break;
+        // Player 2 choices on keydown
+      case "arrowleft":
+        this.player2.setChoice("rock");
+        break;
+      case "arrowdown":
+        this.player2.setChoice("paper");
+        break;
+      case "arrowright":
+        this.player2.setChoice("scissors");
+        break;
+        // Default | Wrong key pressed
+      default:
+        console.log("Wrong key pressed");
+        break;
+    }
+  }
 
   startCountdown(el, cb) {
     let countdown = 3;
+    // Show countdown span
     el.classList.remove("hidden");
     el.innerHTML = countdown;
 
@@ -214,9 +232,11 @@ class RPS {
       countdown--;
       if (countdown <= 0) {
         clearInterval(interval);
+        // Hide countdown span and show choices
         el.classList.add("hidden");
         $("#choicesDisplay").classList.remove("hidden");
         $("#choicesDisplay").classList.add("flex");
+        // Handle keydown event and start battle method
         cb();
       } else {
         el.innerHTML = countdown;
@@ -244,13 +264,28 @@ class RPS {
       this.displayRound();
 
       $("#choicesDisplay").classList.add("hidden");
+
+      // Add event listener for keydown
+      document.addEventListener("keydown", this.handleKeyDown.bind(this));
+
       this.startCountdown(countdownSpan, () => {
+        // Remove event listener after countdown
+        document.removeEventListener("keydown", this.handleKeyDown.bind(this));
+
+        // Assign random choice to players if they weren't set
         if (!this.player1.choice) {
           let randomChoiceIndex = Math.floor(
             Math.random() * this.choices.length
           );
           this.player1.setChoice(this.choices[randomChoiceIndex]);
         }
+        if (!this.player2.choice) {
+          let randomChoiceIndex = Math.floor(
+            Math.random() * this.choices.length
+          );
+          this.player2.setChoice(this.choices[randomChoiceIndex]);
+        }
+
         this.battle();
       });
     });
